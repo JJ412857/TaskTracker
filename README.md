@@ -79,4 +79,4 @@ These technologies ensure the project remains lightweight, easy to maintain, and
 
 ## 5. ER Diagram
 
-*In Respitroy 
+![ERD Diagram](gp_requirement_v1.png)
