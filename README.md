@@ -66,11 +66,11 @@ These relationships ensure that every task has exactly one assigned user and one
 
 TaskTracker will be built using the following tools and technologies:
 
-- **Backend:** Python Flask  
+- **Backend:** Spring Boot, Maven
 - **Frontend:** HTML, CSS, JavaScript  
 - **Database:** MySQL  
 - **Version Control:** Git + GitHub  
-- **Development Tools:** VS Code or PyCharm, diagrams.net for ER diagram  
+- **Development Tools:** VS Code or PyCharm, Lucidchart for ER diagram  
 - **Optional Deployment:** Render, Fly.io, or a local Flask server  
 
 These technologies ensure the project remains lightweight, easy to maintain, and simple for multiple teammates to work on simultaneously.
