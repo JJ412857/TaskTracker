@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tasks</title>
+</head>
+<body>
+
+<h1>Tasks</h1>
+
+<a th:href="@{/tasks/new}">+ New Task</a>
+<br/><br/>
+
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Due Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasks}">
+        <td th:text="${task.title}">Title</td>
+        <td th:text="${task.description}">Description</td>
+        <td th:text="${task.dueDate}">2025-01-01</td>
+        <td th:text="${task.status}">TODO</td>
+        <td>
+            <a th:href="@{/tasks/{id}/edit(id=${task.id})}">Edit</a> |
+            <form th:action="@{/tasks/{id}/delete(id=${task.id})}"
+                  method="post"
+                  style="display:inline">
+                <button type="submit"
+                        onclick="return confirm('Delete this task?');">
+                    Delete
+                </button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
