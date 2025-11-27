@@ -1,36 +1,56 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title th:text="${task.id} == null ? 'New Task' : 'Edit Task'">New Task</title>
+    <meta charset="UTF-8">
+    <title>Create / Edit Task</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css">
 </head>
+
 <body>
 
-<h1 th:text="${task.id} == null ? 'Create Task' : 'Edit Task'">Create Task</h1>
+<header>
+    <h1 th:text="${task.id} != null ? 'Edit Task' : 'Create Task'">Task Form</h1>
+</header>
 
-<form th:action="${task.id} == null ? @{/tasks} : @{/tasks/{id}(id=${task.id})}"
-      th:object="${task}"
-      method="post">
+<section class="actions">
+    <a th:href="@{/tasks}">
+        <button type="button">← Back to Tasks</button>
+    </a>
+</section>
 
-    Title:
-    <input type="text" th:field="*{title}" required/><br/><br/>
+<section class="task-form">
 
-    Description:
-    <textarea th:field="*{description}"></textarea><br/><br/>
+    <form th:action="@{${task.id} != null ? '/tasks/' + ${task.id} + '/edit' : '/tasks'}"
+          th:object="${task}"
+          method="post">
 
-    Due Date:
-    <input type="date" th:field="*{dueDate}"/><br/><br/>
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" th:field="*{title}" placeholder="Task title" required/>
+        </div>
 
-    Status:
-    <select th:field="*{status}">
-        <option value="TODO">To-Do</option>
-        <option value="IN_PROGRESS">In Progress</option>
-        <option value="DONE">Done</option>
-    </select>
-    <br/><br/>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea th:field="*{description}" placeholder="Describe the task"></textarea>
+        </div>
 
-    <button type="submit">Save</button>
-    <a th:href="@{/tasks}">Cancel</a>
-</form>
+        <div class="form-group">
+            <label>Due Date</label>
+            <input type="date" th:field="*{dueDate}" required/>
+        </div>
+
+        <div class="form-group">
+            <label>Status</label>
+            <select th:field="*{status}">
+                <option value="TODO">To Do</option>
+                <option value="IN_PROGRESS">In Progress</option>
+                <option value="DONE">Done</option>
+            </select>
+        </div>
+
+        <button type="submit">Save Task</button>
+    </form>
+</section>
 
 </body>
 </html>

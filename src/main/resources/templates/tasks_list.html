@@ -1,45 +1,82 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Tasks</title>
+    <meta charset="UTF-8">
+    <title>TaskTracker – Tasks</title>
+
+    <!-- Link to your CSS file in src/main/resources/static/css/styles.css -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css">
 </head>
 <body>
 
-<h1>Tasks</h1>
+<header>
+    <h1>TaskTracker – Tasks</h1>
+</header>
 
-<a th:href="@{/tasks/new}">+ New Task</a>
-<br/><br/>
+<!-- Filters section -->
+<section class="filters">
+    <form method="get" action="/tasks">
+        <label>
+            Assignee:
+            <input type="text" name="assignee" placeholder="Search by name">
+        </label>
 
-<table border="1" cellpadding="5" cellspacing="0">
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Due Date</th>
-        <th>Status</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="task : ${tasks}">
-        <td th:text="${task.title}">Title</td>
-        <td th:text="${task.description}">Description</td>
-        <td th:text="${task.dueDate}">2025-01-01</td>
-        <td th:text="${task.status}">TODO</td>
-        <td>
-            <a th:href="@{/tasks/{id}/edit(id=${task.id})}">Edit</a> |
-            <form th:action="@{/tasks/{id}/delete(id=${task.id})}"
-                  method="post"
-                  style="display:inline">
-                <button type="submit"
-                        onclick="return confirm('Delete this task?');">
-                    Delete
-                </button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+        <label>
+            Status:
+            <select name="status">
+                <option value="">Any</option>
+                <option value="TODO">To-Do</option>
+                <option value="IN_PROGRESS">In Progress</option>
+                <option value="DONE">Done</option>
+            </select>
+        </label>
+
+        <button type="submit">Filter</button>
+        <a href="/tasks"><button type="button">Clear</button></a>
+    </form>
+</section>
+
+<!-- New task button -->
+<section class="actions">
+    <a th:href="@{/tasks/new}">
+        <button type="button">+ New Task</button>
+    </a>
+</section>
+
+<!-- Tasks table -->
+<section class="task-table">
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.title}">Title</td>
+            <td th:text="${task.description}">Description</td>
+            <td th:text="${task.dueDate}">2025-01-01</td>
+            <td th:text="${task.status}">TODO</td>
+            <td>
+                <a th:href="@{/tasks/{id}/edit(id=${task.id})}">Edit</a>
+                |
+                <form th:action="@{/tasks/{id}/delete(id=${task.id})}"
+                      method="post"
+                      style="display:inline">
+                    <button type="submit"
+                            onclick="return confirm('Delete this task?');">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
 
 </body>
 </html>
