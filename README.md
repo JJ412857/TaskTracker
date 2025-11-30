@@ -22,11 +22,13 @@ The demo shows how to:
 
 Our final ER diagram has three entities: **User**, **Task**, and **Status**.
 
+![alt text](er_diagram.png)
+
 - Each **User** can be assigned many **Tasks**.
 - Each **Status** value (To Do, In Progress, Done) can be used by many **Tasks**.
 - Each **Task** references exactly one **User** (its assignee) and one **Status**.
 
-![alt text](<Screenshot 2025-11-30 at 3.21.34 PM.png>)
+
 
 **Key relationships:**
 
